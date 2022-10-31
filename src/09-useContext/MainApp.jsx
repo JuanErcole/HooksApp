@@ -1,24 +1,32 @@
-import { Link, Route, Routes } from "react-router-dom"
-import { AboutPage } from "./AboutPage"
-import { HomePage } from "./HomePage"
-import { LoginPage } from "./LoginPage"
+import { Navigate, Route, Routes, Link } from 'react-router-dom';
+
+import { UserProvider } from './context/UserProvider';
+import { HomePage } from './HomePage';
+import { AboutPage } from './AboutPage';
+import { LoginPage } from './LoginPage';
+import { Navbar } from './Navbar';
+
 
 export const MainApp = () => {
   return (
-    <>
-      <h1>MainApp</h1>
-      <hr />   
+    <UserProvider>
+        {/* <h1>MainApp</h1> */}
+        {/* <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/login">Login</Link> */}
+        <Navbar />
+        <hr />
 
-      <Link to="/" >Home</Link>
-      <Link to="/login" >Login</Link>
-      <Link to="/about" >About</Link>
 
-      <Routes>
-        <Route path="/" element={ <HomePage/> } />
-        <Route path="login" element={ <LoginPage/> } />
-        <Route path="/about" element={ <AboutPage/> } />
-      </Routes>
+        <Routes>
+          <Route path="/" element={ <HomePage /> } />
+          <Route path="about" element={ <AboutPage /> } />
+          <Route path="login" element={ <LoginPage /> } />
 
-    </>
+          {/* <Route path="/*" element={ <LoginPage /> } /> */}
+          <Route path="/*" element={ <Navigate to="/about" /> } />
+
+        </Routes>
+    </UserProvider>
   )
 }
